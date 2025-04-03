@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Magical Information Portal</title>
+
+    <link rel="stylesheet" href="\css\index.css" />
+    <script src="\Js\index.js"></script> <!-- Corrected the link to JS file -->
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="magic-sparkle">Book of Secrets</h1>
+      <form id="magicalForm">
+        <div class="form-group">
+          <label for="name">Your Enchanted Name</label>
+          <input type="text" id="name" name="name" placeholder="your name" />
+        </div>
+
+        <div class="form-group">
+          <label for="school">School of Magic</label>
+          <input
+            type="text"
+            id="school"
+            name="school"
+            placeholder="Where you learn your spells..."
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="address">Mystical Address</label>
+          <input
+            type="text"
+            id="address"
+            name="address"
+            placeholder="Your place in the magical realm..."
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="home">Dwelling Description</label>
+          <input
+            type="text"
+            id="home"
+            name="home"
+            placeholder="Castle, cottage, or cloud..."
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="other">Other Magical Details</label>
+          <input
+            type="text"
+            id="other"
+            name="other"
+            placeholder="Any enchanted secrets to share..."
+          />
+        </div>
+
+        <button type="submit">Cast Your Spell</button>
+      </form>
+    </div>
+
+    <script>
+      // Add event listener for form submission
+      document.getElementById("magicalForm").addEventListener("submit", sendRequest);
+
+      // Function to handle form submission and send data to the server
+      function sendRequest(event) {
+        // Prevent page reload on form submission
+        event.preventDefault();
+
+        // Collect form data
+        let data = {
+          Name: document.getElementById("name").value,
+          School: document.getElementById("school").value,
+          Address: document.getElementById("address").value,
+          Descriptions: document.getElementById("home").value,
+          Details: document.getElementById("other").value,
+        };
+
+        // Debug: Log data to the console
+        console.log("Magical Data Sent:", data);
+
+        // Send data to the server (you need to define the server endpoint here)
+        // Example using fetch API (you can replace 'yourApiEndpoint' with the real API path)
+        fetch('yourApiEndpoint', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+          // You can display a success message or update the UI here
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+      }
+    </script>
+  </body>
+</html>
