@@ -19,8 +19,8 @@ def insert_student():
     data = request.json  # รับข้อมูลจากผู้ใช้ในรูปแบบ JSON
     conn = get_db_connection()
     conn.execute(
-        "INSERT INTO students (Name, School, Address, Descriptions, Details) VALUES (?, ?, ?, ?, ?)",
-        (data["Name"], data["School"], data["Address"], data["Descriptions"], data["Details"]),
+        "INSERT INTO students (Name, School, Address, House, Details) VALUES (?, ?, ?, ?, ?)",
+        (data["Name"], data["School"], data["Address"], data["House"], data["Details"]),
     )
     conn.commit()
     conn.close()
