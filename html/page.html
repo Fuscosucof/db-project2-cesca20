@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hogwarts Developers</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Georgia', serif;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        
+        .background {
+            background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+           
+        }
+        
+        /* .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(76, 0, 130, 0.4);
+            z-index: -1;
+        } */
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+    
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-top: 30px;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #9370DB, 0 0 20px #9370DB;
+            color: #f8f8ff;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: #e0e0ff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px #9370DB;
+        }
+        
+        .profiles {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .profile {
+            width: 200px;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .profile:hover {
+            transform: translateY(-10px);
+        }
+        
+        .frame {
+            position: relative;
+            height: 200px;
+            background-color: rgba(56, 4, 111, 0.378);
+            border: 8px solid #4B0082;
+            border-radius: 10px;
+            box-shadow: 0 0 15px #9370DB, inset 0 0 20px rgba(147, 112, 219, 0.3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+        }
+        
+        .frame:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('/api/placeholder/50/50');
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #9370DB;
+            box-shadow: 0 0 10px #9370DB;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        
+        .profile-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #e0e0ff;
+            text-align: center;
+            text-shadow: 0 0 5px #9370DB;
+        }
+        
+        .profile-title {
+            font-size: 0.9rem;
+            color: #c8c8ff;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .house-emblem {
+            width: 30px;
+            height: 30px;
+            margin-top: 10px;
+        }
+        
+        .magic-sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: #9370DB;
+            border-radius: 50%;
+            filter: blur(1px);
+            box-shadow: 0 0 5px #9370DB, 0 0 10px #9370DB;
+            animation: float 3s infinite ease-in-out;
+            opacity: 0.7;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-10px) scale(1.2);
+                opacity: 1;
+            }
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: rgba(25, 0, 51, 0.7);
+            border-top: 4px solid #4B0082;
+            box-shadow: 0 0 15px #9370DB;
+        }
+        
+        .footer-text {
+            color: #e0e0ff;
+            font-size: 1rem;
+            text-shadow: 0 0 5px #9370DB;
+        }
+        
+        /* Add random sparkles */
+        .sparkle-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .magical-button {
+    background: linear-gradient(135deg, #4B0082, #9370DB);
+    color: #e0e0ff;
+    border: 3px solid #9370DB;
+    border-radius: 10px;
+    padding: 12px 25px;
+    font-family: 'Georgia', serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    margin: 30px auto;
+    display: block;
+    box-shadow: 0 0 10px #9370DB, inset 0 0 5px rgba(147, 112, 219, 0.5);
+    text-shadow: 0 0 5px #9370DB;
+    overflow: hidden;
+}
+
+.magical-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px #9370DB, 0 0 25px #9370DB, inset 0 0 10px rgba(147, 112, 219, 0.7);
+}
+
+.magical-button:active {
+    transform: translateY(2px);
+    box-shadow: 0 0 5px #9370DB, inset 0 0 5px rgba(147, 112, 219, 0.9);
+}
+
+.magical-button::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(147, 112, 219, 0.3) 0%, transparent 70%);
+    transform: scale(0);
+    transition: transform 0.6s ease-out;
+    z-index: -1;
+}
+
+.magical-button:hover::before {
+    transform: scale(1);
+}
+
+/* Add this to create the sparkle effect on hover */
+.button-sparkle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: #e0e0ff;
+    border-radius: 50%;
+    filter: blur(1px);
+    box-shadow: 0 0 5px #9370DB, 0 0 10px #9370DB;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.magical-button:hover .button-sparkle {
+    opacity: 1;
+    animation: buttonSparkle 2s infinite ease-in-out;
+}
+
+@keyframes buttonSparkle {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translate(5px, -5px) scale(1.5);
+        opacity: 1;
+    }
+}
+
+        
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="overlay"></div>
+    
+    <div class="container">
+        <header>
+            <h1>Hogwarts School of Development</h1>
+            <div class="subtitle">Where Code Meets Magic</div>
+        </header>
+        
+        <div class="profiles">
+            <!-- Profile 1 -->
+            <div class="profile">
+                <div class="frame">
+                    <img src="../pic/IMG_1331.png" alt="Developer 1" class="profile-image">
+                    <div class="profile-name">Warit Imathes</div>
+                    <div class="profile-title">Pheonix</div>
+                    <!-- <img src="/api/placeholder/30/30" alt="Gryffindor" class="house-emblem"> -->
+                    <div class="sparkle-container">
+                        <div class="magic-sparkle" style="top: 20%; left: 15%; animation-delay: 0s;"></div>
+                        <div class="magic-sparkle" style="top: 70%; left: 80%; animation-delay: 1.5s;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Profile 2 -->
+            <div class="profile">
+                <div class="frame">
+                    <img src="../pic/IMG_6917.JPG" alt="Developer 2" class="profile-image">
+                    <div class="profile-name">Pansorn Suansomboon</div>
+                    <div class="profile-title">Algorithm Enchantress</div>
+                    <!-- <img src="/api/placeholder/30/30" alt="Gryffindor" class="house-emblem"> -->
+                    <div class="sparkle-container">
+                        <div class="magic-sparkle" style="top: 30%; left: 25%; animation-delay: 0.7s;"></div>
+                        <div class="magic-sparkle" style="top: 60%; left: 70%; animation-delay: 2.1s;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Profile 3 -->
+            <div class="profile">
+                <div class="frame">
+                    <img src="../pic/IMG_3150.JPG" alt="Developer 3" class="profile-image">
+                    <div class="profile-name">Suphawat Nanthadee</div>
+                    <div class="profile-title">Backend Sorcerer</div>
+                    <!-- <img src="/api/placeholder/30/30" alt="Gryffindor" class="house-emblem"> -->
+                    <div class="sparkle-container">
+                        <div class="magic-sparkle" style="top: 40%; left: 20%; animation-delay: 1.2s;"></div>
+                        <div class="magic-sparkle" style="top: 75%; left: 65%; animation-delay: 0.3s;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Profile 4 -->
+            <div class="profile">
+                <div class="frame">
+                    <img src="../pic/IMG_0333.JPG" alt="Developer 4" class="profile-image">
+                    <div class="profile-name">Chayanat Ratchaneeporn</div>
+                    <div class="profile-title">UX Illusionist</div>
+                    <!-- <img src="/api/placeholder/30/30" alt="Ravenclaw" class="house-emblem"> -->
+                    <div class="sparkle-container">
+                        <div class="magic-sparkle" style="top: 25%; left: 30%; animation-delay: 1.8s;"></div>
+                        <div class="magic-sparkle" style="top: 65%; left: 75%; animation-delay: 0.5s;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Profile 5 -->
+            <div class="profile">
+                <div class="frame">
+                    <img src="../pic/IMG_4036.JPG" alt="Developer 5" class="profile-image">
+                    <div class="profile-name">Nimmida Roonnajuk</div>
+                    <div class="profile-title">Manticore</div>
+                    <!-- <img src="/api/placeholder/30/30" alt="Slytherin" class="house-emblem"> -->
+                    <div class="sparkle-container">
+                        <div class="magic-sparkle" style="top: 35%; left: 15%; animation-delay: 0.9s;"></div>
+                        <div class="magic-sparkle" style="top: 70%; left: 80%; animation-delay: 2.4s;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Profile 6 -->
+            <div class="profile">
+                <div class="frame">
+                    <img src="../pic/Screenshot 2568-04-03 at 20.39.58.jpeg" alt="Developer 6" class="profile-image">
+                    <div class="profile-name">Netiwit Waiprib</div>
+                    <div class="profile-title">Pheonix</div>
+                    <!-- <img src="/api/placeholder/30/30" alt="Hufflepuff" class="house-emblem"> -->
+                    <div class="sparkle-container">
+                        <div class="magic-sparkle" style="top: 20%; left: 25%; animation-delay: 1.5s;"></div>
+                        <div class="magic-sparkle" style="top: 60%; left: 85%; animation-delay: 0.2s;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Profile 7 -->
+            <div class="profile">
+                <div class="frame">
+                    <img src="../pic/BF0D3B4A-6354-4156-BE48-E917F403A91F.jpg" alt="Developer 7" class="profile-image">
+                    <div class="profile-name">Natthanita Suradet</div>
+                    <div class="profile-title">Pheonix</div>
+                    <!-- <img src="/api/placeholder/30/30" alt="Hufflepuff" class="house-emblem"> -->
+                    <div class="sparkle-container">
+                        <div class="magic-sparkle" style="top: 30%; left: 20%; animation-delay: 0.6s;"></div>
+                        <div class="magic-sparkle" style="top: 75%; left: 70%; animation-delay: 1.9s;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- <button class="button" onclick="window.location.href='../html/index3.html'">Go back</button> -->
+
+    <div style="text-align: center; margin-top: 30px;">
+        <button class="magical-button" onclick="window.location.href='/html/start.html'">
+            Return to Hogwarts
+            <div class="button-sparkle" style="top: 20%; left: 15%;"></div>
+            <div class="button-sparkle" style="top: 70%; right: 15%;"></div>
+            <div class="button-sparkle" style="bottom: 20%; left: 40%;"></div>
+        </button>
+    </div>
+    
+    <script>
+        // Add random sparkles throughout the page
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.body;
+            for (let i = 0; i < 30; i++) {
+                createSparkle(container);
+            }
+            
+            // Add hover effect to profiles
+            const profiles = document.querySelectorAll('.profile');
+            profiles.forEach(profile => {
+                profile.addEventListener('mouseenter', function() {
+                    for (let i = 0; i < 5; i++) {
+                        const sparkle = document.createElement('div');
+                        sparkle.classList.add('magic-sparkle');
+                        sparkle.style.left = Math.random() * 100 + '%';
+                        sparkle.style.top = Math.random() * 100 + '%';
+                        sparkle.style.animationDelay = Math.random() * 3 + 's';
+                        
+                        const sparkleContainer = this.querySelector('.sparkle-container');
+                        sparkleContainer.appendChild(sparkle);
+                        
+                        setTimeout(() => {
+                            sparkle.remove();
+                        }, 3000);
+                    }
+                });
+            });
+        });
+        
+        function createSparkle(container) {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('magic-sparkle');
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = Math.random() * 100 + 'vw';
+            sparkle.style.top = Math.random() * 100 + 'vh';
+            sparkle.style.animationDelay = Math.random() * 5 + 's';
+            sparkle.style.animationDuration = Math.random() * 3 + 3 + 's';
+            container.appendChild(sparkle);
+        }
+    </script>
+</body>
+</html>
