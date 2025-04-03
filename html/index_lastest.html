@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Magical Information Portal</title>
 
-    <link rel="stylesheet" href="\css\index.css" />
-    <script src="\Js\index.js"></script> <!-- Corrected the link to JS file -->
+    <link rel="stylesheet" href="../css/index2.css" />
+    <!-- <script src="Js/index2.js"></script>  -->
   </head>
   <body>
     <div class="container">
@@ -76,15 +76,17 @@
           School: document.getElementById("school").value,
           Address: document.getElementById("address").value,
           House: document.getElementById("home").value,
-          Details: document.getElementById("other").value,
+          Details: document.getElementById("other").value
         };
+
+        const apiPath = "http://127.0.0.1:5000/cesca20"; // Update to the correct API endpoint
 
         // Debug: Log data to the console
         console.log("Magical Data Sent:", data);
 
         // Send data to the server (you need to define the server endpoint here)
         // Example using fetch API (you can replace 'yourApiEndpoint' with the real API path)
-        fetch('yourApiEndpoint', {
+        fetch(apiPath, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -94,6 +96,8 @@
         .then(response => response.json())
         .then(data => {
           console.log('Success:', data);
+          document.getElementById("magicalForm").reset();
+
           // You can display a success message or update the UI here
         })
         .catch((error) => {

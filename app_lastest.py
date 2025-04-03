@@ -14,9 +14,10 @@ def get_db_connection():
     return conn
 
 # เพิ่มข้อมูลนักเรียนใหม่
-@app.route("/", methods=["POST"])
+@app.route("/cesca20", methods=["POST"])
 def insert_student():
     data = request.json  # รับข้อมูลจากผู้ใช้ในรูปแบบ JSON
+    print(data)
     conn = get_db_connection()
     conn.execute(
         "INSERT INTO students (Name, School, Address, House, Details) VALUES (?, ?, ?, ?, ?)",
@@ -25,3 +26,6 @@ def insert_student():
     conn.commit()
     conn.close()
     return jsonify({"message": "เพิ่มข้อมูลนักเรียนเรียบร้อยแล้ว"}), 201
+
+if __name__ == "__main__":
+    app.run(debug=True)
