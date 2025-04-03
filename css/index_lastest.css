@@ -1,6 +1,8 @@
+
 body {
     background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3');
     background-size: cover;
+    background-attachment: fixed;
     font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
     color: #f1f1f1;
     margin: 0;
@@ -21,6 +23,7 @@ body {
                 0 0 60px rgba(138, 43, 226, 0.3);
     max-width: 500px;
     width: 90%;
+    margin: 20px 0;
 }
 
 h1 {
@@ -29,6 +32,8 @@ h1 {
     margin-bottom: 30px;
     font-size: 2.2em;
     text-shadow: 0 0 5px #a17721;
+    position: relative;
+    padding: 0 30px;
 }
 
 .form-group {
@@ -42,23 +47,64 @@ label {
     font-size: 1.1em;
 }
 
-input[type="text"] {
+input[type="text"],
+select {
     width: 100%;
     padding: 12px;
     border: none;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.15);
-    color: white;
     font-size: 16px;
     box-sizing: border-box;
     transition: all 0.3s ease;
     border-bottom: 2px solid #9370DB;
 }
 
-input[type="text"]:focus {
+/* สไตล์เมื่อยังไม่มีค่าใน input */
+input[type="text"]:not(:focus):placeholder-shown {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* สไตล์เมื่อยังไม่เลือกค่าใน select */
+select:invalid,
+select option[value=""][disabled] {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* สไตล์เมื่อมีค่าแล้ว */
+input[type="text"]:not(:placeholder-shown),
+select:valid {
+    color: white;
+}
+
+input[type="text"]:focus,
+select:focus {
     outline: none;
     background-color: rgba(255, 255, 255, 0.25);
     box-shadow: 0 0 8px #d4af37;
+    color: white;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    cursor: pointer;
+}
+
+/* สไตล์ตัวเลือกใน dropdown */
+select option {
+    background-color: #1a1a4a;
+    color: white;
+    padding: 10px;
+}
+
+/* สไตล์ placeholder ใน dropdown */
+select option[value=""][disabled] {
+    color: rgba(255, 255, 255, 0.5);
 }
 
 button {
@@ -73,27 +119,52 @@ button {
     margin-top: 15px;
     transition: all 0.3s ease;
     font-family: inherit;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 button:hover {
     background: linear-gradient(135deg, #a57eeb, #6a1ca3);
     box-shadow: 0 0 15px rgba(138, 43, 226, 0.8);
+    transform: translateY(-2px);
 }
 
-.magic-sparkle {
-    position: relative;
-}
-
-.magic-sparkle::before {
-    content: "✨";
-    position: absolute;
-    left: -25px;
-    top: 10px;
-}
-
+.magic-sparkle::before,
 .magic-sparkle::after {
     content: "✨";
     position: absolute;
-    right: -25px;
-    top: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+}
+
+.magic-sparkle::before {
+    left: 0;
+}
+
+.magic-sparkle::after {
+    right: 0;
+}
+
+::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+        width: 95%;
+    }
+    
+    h1 {
+        font-size: 1.8em;
+        padding: 0 25px;
+    }
+    
+    .magic-sparkle::before,
+    .magic-sparkle::after {
+        font-size: 1em;
+    }
 }

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Magical Information Portal</title>
 
-    <link rel="stylesheet" href="../css/index2.css" />
+    <link rel="stylesheet" href="../css/index_lastest.css" />
     <!-- <script src="Js/index2.js"></script>  -->
   </head>
   <body>
@@ -14,7 +14,7 @@
       <form id="magicalForm">
         <div class="form-group">
           <label for="name">Your Enchanted Name</label>
-          <input type="text" id="name" name="name" placeholder="your name" />
+          <input type="text" id="name" name="name" placeholder="As written in the stars..." required/>
         </div>
 
         <div class="form-group">
@@ -24,6 +24,7 @@
             id="school"
             name="school"
             placeholder="Where you learn your spells..."
+            required
           />
         </div>
 
@@ -34,18 +35,20 @@
             id="address"
             name="address"
             placeholder="Your place in the magical realm..."
+            required
           />
         </div>
 
         <div class="form-group">
-          <label for="home">Determined house</label>
-          <input
-            type="text"
-            id="home"
-            name="home"
-            placeholder="Castle, cottage, or cloud..."
-          />
-        </div>
+          <label for="home">Hogwarts House</label>
+          <select id="house" name="house" required>
+            <option  value="" disabled selected hidden>Choose your house...</option>
+            <option  value="gryffindor">Gryffindor</option>
+            <option  value="hufflepuff">Hufflepuff</option>
+            <option  value="ravenclaw">Ravenclaw</option>
+            <option  value="slytherin">Slytherin</option>
+        </select>
+    </div>
 
         <div class="form-group">
           <label for="other">Other Magical Details</label>
@@ -54,6 +57,7 @@
             id="other"
             name="other"
             placeholder="Any enchanted secrets to share..."
+            required
           />
         </div>
 
@@ -75,7 +79,7 @@
           Name: document.getElementById("name").value,
           School: document.getElementById("school").value,
           Address: document.getElementById("address").value,
-          House: document.getElementById("home").value,
+          House: document.getElementById("house").value,
           Details: document.getElementById("other").value
         };
 
