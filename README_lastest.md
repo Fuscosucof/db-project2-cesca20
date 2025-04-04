@@ -52,4 +52,4 @@ Prompt ที่ถาม AI
 2. กรอกข้อมูลครบทุกช่อง
 หากผู้ใช้กรอกข้อมูลครบทุกช่องและกดปุ่ม "Cast Your Spell", ฟอร์มจะถูกส่งไปยังเซิร์ฟเวอร์ และหากเซิร์ฟเวอร์ทำงานถูกต้อง (เช่น API ของคุณที่รับ POST request) ฟอร์มจะถูกรีเซ็ตหรือแสดงข้อความที่คุณตั้งค่าใน JavaScript ได้ เช่น "Success" หรือ "Data Submitted".
 
-Query และ Prompt ที่ใช้ใน SQLite query
+https://www.canva.com/design/DAGjkWQKeHs/iRcqJAaUJiXfaGZouINnFg/edit?utm_content=DAGjkWQKeHs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
